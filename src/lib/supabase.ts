@@ -1,12 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+// Fallbacks prevent build-time errors when env vars aren't yet injected.
+// Real values are always present at runtime.
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key'
+)
 
-// Public client — for use in browser and public API routes
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
-// Service client — bypasses RLS, server-side only
-// Never expose this to the browser
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+// Service client — bypasses RLS, server-side only. Never expose to the browser.
+export const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-service-key'
+)
