@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY || 'placeholder-key')
 
 const FROM = 'Satoshi Stop Loss <alerts@nput.foundation>'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://nput.foundation'
