@@ -202,6 +202,108 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── WHY IT MATTERS ── */}
+      <section className="border-t border-white/5 py-20 px-6 bg-[#0d0d0d]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-4">Why it matters</h2>
+          <p className="text-white/40 text-center text-sm max-w-xl mx-auto mb-14">
+            This isn&apos;t just about one person&apos;s coins. It&apos;s about what it would signal to the world.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-6">
+            <WhyCard
+              icon="₿"
+              title="~1,100,000 BTC"
+              body="Roughly 5% of all Bitcoin that will ever exist sits in wallets attributed to Satoshi. A move would be the single largest Bitcoin transfer in history — instantly."
+            />
+            <WhyCard
+              icon="📉"
+              title="Market-moving event"
+              body="Bitcoin markets have never priced in a Satoshi sell. Holders, institutions, and exchanges would react within minutes. Being informed first matters."
+            />
+            <WhyCard
+              icon="❓"
+              title="The biggest open question in crypto"
+              body="Is Satoshi alive? Did they lose access? Are the keys still secure? A single transaction — or the absence of one — speaks volumes."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE SCIENCE ── */}
+      <section className="border-t border-white/5 py-20 px-6">
+        <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="text-xs text-bitcoin font-medium uppercase tracking-wider mb-3">The research</div>
+            <h2 className="text-2xl font-bold mb-4">Built on peer-reviewed blockchain forensics</h2>
+            <p className="text-white/40 text-sm leading-relaxed mb-4">
+              The Patoshi pattern was identified by cryptographer Sergio Demian Lerner in 2013.
+              By analysing distinctive nonce patterns in early Bitcoin blocks, he traced approximately
+              22,000 blocks — and their coinbase rewards — to a single miner now known as &quot;Patoshi.&quot;
+            </p>
+            <p className="text-white/40 text-sm leading-relaxed mb-6">
+              The address list we monitor is derived directly from the public keys in those coinbase
+              transactions, converted to standard P2PKH Bitcoin addresses. Every address is verifiable
+              on-chain.
+            </p>
+            <a href="/methodology" className="inline-flex items-center gap-2 text-sm text-bitcoin hover:text-bitcoin/80 transition-colors font-medium">
+              Read the full methodology →
+            </a>
+          </div>
+          <div className="space-y-4">
+            <SourceCard
+              label="Original research"
+              title="Lerner's Patoshi Pattern Analysis"
+              url="https://bitslog.com/2013/04/17/the-well-deserved-fortune-of-satoshi-nakamoto/"
+              description="The 2013 paper identifying the Patoshi mining pattern from nonce analysis"
+            />
+            <SourceCard
+              label="Address database"
+              title="bensig/patoshi-addresses"
+              url="https://github.com/bensig/patoshi-addresses"
+              description="Open-source dataset of Patoshi public keys — the source we use"
+            />
+            <SourceCard
+              label="Block explorer"
+              title="mempool.space"
+              url="https://mempool.space"
+              description="Real-time Bitcoin mempool and block data powering our monitor"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── QUANTUM THREAT ── */}
+      <section className="border-t border-white/5 py-20 px-6 bg-[#0d0d0d]">
+        <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-12 items-center">
+          <div className="order-2 sm:order-1 bg-[#0f0f0f] border border-white/5 rounded-2xl p-6 space-y-4 font-mono text-xs">
+            <div className="text-white/20">// Early Bitcoin address type</div>
+            <div><span className="text-bitcoin">scriptPubKey</span><span className="text-white/40">: OP_CHECKSIG</span></div>
+            <div className="text-white/20 mt-4">// Public key is exposed on-chain</div>
+            <div><span className="text-green-400">pubKey</span><span className="text-white/40">: 04a1b2c3d4... (visible)</span></div>
+            <div className="text-white/20 mt-4">// Quantum risk</div>
+            <div><span className="text-red-400">Shor&apos;s algorithm</span><span className="text-white/40">: pubKey → privKey</span></div>
+            <div className="text-white/20">// ECDSA secp256k1 is vulnerable</div>
+          </div>
+          <div className="order-1 sm:order-2">
+            <div className="text-xs text-red-400 font-medium uppercase tracking-wider mb-3">Quantum risk</div>
+            <h2 className="text-2xl font-bold mb-4">A second reason these wallets may move — or disappear</h2>
+            <p className="text-white/40 text-sm leading-relaxed mb-4">
+              Many Patoshi outputs use an older script format (Pay-to-Public-Key) where the public key
+              is directly exposed on the blockchain. Unlike modern addresses, there&apos;s no hash layer
+              protecting the key.
+            </p>
+            <p className="text-white/40 text-sm leading-relaxed mb-6">
+              A sufficiently powerful quantum computer running Shor&apos;s algorithm could theoretically
+              derive the private key from the exposed public key — without any cooperation from Satoshi.
+              Most estimates put this 10–20 years away, but the timeline is narrowing.
+            </p>
+            <a href="/methodology#quantum" className="inline-flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors font-medium">
+              Understand the quantum threat →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── FOOTER ── */}
       <footer className="border-t border-white/5 px-6 py-8">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/20">
@@ -233,5 +335,30 @@ function Step({ n, title, body }: { n: string; title: string; body: string }) {
       <h3 className="font-semibold mb-2">{title}</h3>
       <p className="text-sm text-white/40 leading-relaxed">{body}</p>
     </div>
+  )
+}
+
+function WhyCard({ icon, title, body }: { icon: string; title: string; body: string }) {
+  return (
+    <div className="bg-[#0f0f0f] border border-white/5 rounded-2xl p-6">
+      <div className="text-2xl mb-3">{icon}</div>
+      <h3 className="font-semibold text-white mb-2">{title}</h3>
+      <p className="text-sm text-white/40 leading-relaxed">{body}</p>
+    </div>
+  )
+}
+
+function SourceCard({ label, title, url, description }: { label: string; title: string; url: string; description: string }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block bg-[#0f0f0f] border border-white/5 hover:border-bitcoin/20 rounded-xl p-4 transition-colors group"
+    >
+      <div className="text-xs text-bitcoin/70 uppercase tracking-wider mb-1">{label}</div>
+      <div className="text-sm font-medium text-white group-hover:text-bitcoin transition-colors mb-1">{title} ↗</div>
+      <div className="text-xs text-white/30">{description}</div>
+    </a>
   )
 }
