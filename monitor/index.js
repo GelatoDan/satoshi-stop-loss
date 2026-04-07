@@ -62,16 +62,29 @@ async function main() {
 async function loadPatoshiAddresses() {
   console.log('📋 Loading Patoshi addresses from Supabase...')
 
-  const { data, error } = await supabase
-    .from('patoshi_addresses')
-    .select('address')
+  // Paginate through all addresses — Supabase returns max 1000 rows per request
+  const PAGE_SIZE = 1000
+  let allAddresses = []
+  let page = 0
 
-  if (error) {
-    console.error('❌ Failed to load addresses:', error.message)
-    process.exit(1)
+  while (true) {
+    const { data, error } = await supabase
+      .from('patoshi_addresses')
+      .select('address')
+      .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
+
+    if (error) {
+      console.error('❌ Failed to load addresses:', error.message)
+      process.exit(1)
+    }
+
+    if (!data || data.length === 0) break
+    allAddresses = allAddresses.concat(data.map(row => row.address))
+    if (data.length < PAGE_SIZE) break
+    page++
   }
 
-  patoshiAddresses = new Set(data.map(row => row.address))
+  patoshiAddresses = new Set(allAddresses)
   console.log(`✅ Loaded ${patoshiAddresses.size} Patoshi addresses into memory`)
 
   if (patoshiAddresses.size === 0) {
