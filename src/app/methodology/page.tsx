@@ -231,20 +231,23 @@ export default function MethodologyPage() {
 
           <h3 className="text-lg font-semibold mt-8 mb-3">How far away is this threat?</h3>
           <p className="text-white/50 leading-relaxed mb-4">
-            Breaking secp256k1 (Bitcoin&apos;s elliptic curve) is estimated to require on the order of
-            4,000 logical (error-corrected) qubits running Shor&apos;s algorithm. Today&apos;s best
-            quantum computers — including Google&apos;s Willow chip announced in late 2024 — operate
-            with physical qubits that are far from fault-tolerant at the scale required.
+            Closer than most people think. Industry roadmaps — led by IBM, Google, Microsoft, Amazon,
+            and Intel — suggest quantum computers may be capable of breaking ECDSA cryptography
+            in as little as 2–5 years. The US federal government has issued a mandate to phase out
+            ECDSA entirely by 2035.
           </p>
           <p className="text-white/50 leading-relaxed mb-4">
-            Current academic consensus puts a cryptographically relevant quantum computer 10–20 years
-            away, though timelines have consistently surprised researchers in both directions.
-            The threat is not imminent — but the public keys are already exposed and that exposure is permanent.
+            Even accepting the most optimistic timeline, a Bitcoin-wide response would require changes
+            at the protocol level, the software level, the infrastructure level, and ultimately
+            user-level key migrations — a process that takes years in a decentralised network.
+            The window to act is narrower than the countdown to the threat itself.
           </p>
           <p className="text-white/50 leading-relaxed">
-            If a state actor or well-resourced private entity cracked a Patoshi key before Satoshi
-            (if alive) could respond, the resulting movement would be indistinguishable from a
-            voluntary spend. Our monitor would fire either way — which is exactly the point.
+            For Patoshi&apos;s wallets specifically, no migration is possible without the private keys.
+            If Satoshi is unable or unwilling to move the coins to quantum-resistant addresses before
+            a capable quantum computer exists, those keys become permanently vulnerable. A state actor
+            or well-resourced private entity cracking one would produce a transaction indistinguishable
+            from a voluntary Satoshi spend — and our monitor would fire either way.
           </p>
 
           <div className="mt-6">

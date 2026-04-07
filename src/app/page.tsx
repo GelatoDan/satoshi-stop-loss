@@ -293,9 +293,10 @@ export default function HomePage() {
               protecting the key.
             </p>
             <p className="text-white/40 text-sm leading-relaxed mb-6">
-              A sufficiently powerful quantum computer running Shor&apos;s algorithm could theoretically
-              derive the private key from the exposed public key — without any cooperation from Satoshi.
-              Most estimates put this 10–20 years away, but the timeline is narrowing.
+              A sufficiently powerful quantum computer running Shor&apos;s algorithm could derive the
+              private key from the exposed public key — without any cooperation from Satoshi.
+              Industry roadmaps from IBM, Google, and others put this capability 2–5 years away.
+              The US government has mandated phasing out ECDSA by 2035.
             </p>
             <a href="/methodology#quantum" className="inline-flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors font-medium">
               Understand the quantum threat →
